@@ -1,0 +1,20 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!bin
+!bin/**
+!octopus
+!octopus/*
+!LICENSE
+!package.json
+!package-lock.json
+!README.md
+!CHANGELOG
+!web-server/secure-channels/wallet-template
+!helloworld-dsu
+!helloworld-dsu/*
+!helloworld-constitution
+!helloworld-constitution/*
+

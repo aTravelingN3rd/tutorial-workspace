@@ -1,0 +1,7 @@
+    Update README.markdown
+    Added discriminator class when files are added in psk-files-chooser
+    cleanup
+    Changed profile.html
+    Refactored SWAgent.
+    build fixed
+    Update readme file. This will also fix the error triggered by wrong JSON addition to menu.json

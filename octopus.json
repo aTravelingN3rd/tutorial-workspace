@@ -1,0 +1,216 @@
+{
+    "workDir": ".",
+    "dependencies": [
+        {
+            "name": "privatesky",
+            "src": "http://github.com/privatesky/privatesky.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd privatesky && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd privatesky && npm run build"
+                }
+            ]
+        },
+        {
+            "name": "cardinal",
+            "src": "http://github.com/privatesky/cardinal.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm install"
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm run build"
+                }
+            ]
+        },
+        {
+            "name": "themes/blue-fluorite-theme",
+            "src": "https://github.com/PrivateSky/blue-fluorite-theme.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/blue-fluorite-theme && npm install"
+                }
+            ]
+        },
+        {
+            "name": "menu-wallet-prototype",
+            "src": "http://github.com/privatesky/menu-wallet-prototype.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd menu-wallet-prototype && npm install"
+                }
+            ]
+        },
+        {
+            "name": "web-server/tutorial/loader",
+            "src": "http://github.com/privatesky/web-dossier-loader.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd web-server/tutorial/loader && npm install"
+                }
+            ]
+        },
+        {
+            "name": "profile-ssapp-prototype",
+            "src": "http://github.com/privatesky/profile-ssapp-prototype.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd profile-ssapp-prototype && npm install"
+                }
+            ]
+        },
+        {
+            "name": "ssapp-minimal-app",
+            "src": "https://github.com/PrivateSky/ssapp-minimal-app.git",
+            "actions": [
+                {
+                    "type": "smartClone",
+                    "target": ".",
+                    "collectLog": false
+                },
+                {
+                    "type": "execute",
+                    "cmd": "cd ssapp-minimal-app && npm install"
+                }
+            ]
+        }
+    ],
+    "build": [
+        {
+            "name": "cardinal-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd cardinal && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "blue-fluorite-theme-wallet-build",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd themes/blue-fluorite-theme && npm run build-dossier"
+                }
+            ]
+        },
+        {
+            "name": "tutorial_bind_to_menu-wallet-prototype",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd menu-wallet-prototype && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./menu-wallet-prototype/seed",
+                    "target": "./web-server/tutorial/wallet-template/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "tutorial_bind_to_profile-ssapp-prototype",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd profile-ssapp-prototype && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./profile-ssapp-prototype/seed",
+                    "target": "./web-server/tutorial/apps/profile-ssapp/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "tutorial_bind_to_ssapp-minimal-app",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd ssapp-minimal-app && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./ssapp-minimal-app/seed",
+                    "target": "./web-server/tutorial/apps/ssapp-minimal-app/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "tutorial_bind_to_helloworld-ssapp",
+            "src": "",
+            "actions": [
+                {
+                    "type": "execute",
+                    "cmd": "cd helloworld-ssapp && npm run build"
+                },
+                {
+                    "type": "copy",
+                    "src": "./helloworld-ssapp/seed",
+                    "target": "./web-server/tutorial/apps/helloworld-ssapp/seed",
+                    "options": {
+                        "overwrite": true
+                    }
+                },
+                {
+                    "type": "execute",
+                    "cmd": "echo Use this folder template in order to customize the application instance by adding configuration, pages etc. > ./web-server/tutorial/apps/helloworld-ssapp/readme"
+                }
+            ]
+        }
+    ]
+}
