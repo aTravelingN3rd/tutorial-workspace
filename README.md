@@ -1,5 +1,20 @@
 # tutorial-workspace
 
+I start working on simulating a resolver using sReadSSIs. To run my attempt, follow the same instructions than for the hello world DSU. 
+
+Then:
+
+```sh
+# Step 1: Go inside [tutorial-valentin]
+cd tutorial-valentin
+
+# Step 2: Run the app
+node mainAlt.js
+```
+
+
+# tutorial-workspace
+
 [tutorial-workspace](https://github.com/PrivateSky/tutorial-workspace) is a basic workspace based on [template-workplace](https://github.com/PrivateSky/template-workspace) and contains the following applications:
 * a simple **todo** application - A simple todo application. Included from [ssapp-minimal-app](https://github.com/PrivateSky/ssapp-minimal-app)  
 * a **profile** application - An application that display the "profile" of an user. Included from [profile-ssapp-prototype](https://github.com/PrivateSky/profile-ssapp-prototype)
