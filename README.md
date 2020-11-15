@@ -1,4 +1,4 @@
-# tutorial-workspace
+# tutorial-valentin
 
 I start working on simulating a resolver using sReadSSIs. To run my attempt, follow the same instructions than for the hello world DSU. 
 
