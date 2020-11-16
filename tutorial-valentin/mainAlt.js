@@ -43,8 +43,8 @@ var fileText2="Hello underworld";
 
 
 
-
-seedSSI.initialize(seedSSI.getDLDomain(), "privatekey"/*private key*/, undefined, "v0", "hint",   (err, seedSSI) => {
+//param initialize: dlDomain, privateKey, publicKey, vn, hint, callback
+seedSSI.initialize(seedSSI.getDLDomain(), undefined, undefined, "v0", "hint",   (err, seedSSI) => {
         if (err) {
             throw err;
         }
@@ -60,7 +60,7 @@ seedSSI.initialize(seedSSI.getDLDomain(), "privatekey"/*private key*/, undefined
         //console.log(seedSSI.getAnchorId());
         //console.log(szaSSI.getIdentifier());
 
-        runTest();
+        runTest(seedSSI);
 
 
       
@@ -98,9 +98,10 @@ console.log('///First Test ok///')
 //var favouriteEndpoint="http://localhost:8080";
 
 
-function runTest(callback) {
+function runTest(keySSI,callback) {
 
-    resolver.createDSU(seedSSI, {
+    resolver.createDSU(keySSI, {
+
         //favouriteEndpoint,
         //anchorinOpions:{signingFn }, //?
         validationRules: {
@@ -123,6 +124,7 @@ function runTest(callback) {
         //available in privatesky/modules/bar/lib/ARchive
         //console.log("dsu fonctions:",dsu);
         //dsu.setValidationRules()
+        console.log("keySSI",keySSI.getIdentifier());
         writeAndReadTest(dsu, callback);
 
     });
@@ -133,9 +135,10 @@ function writeAndReadTest(dsu, callback) {
     dsu.writeFile('/data.txt',fileText1, (err, hash) => {
         dsu.readFile('/data.txt', (err, data) => {
             dsu.getKeySSI((err, keyidentifier) => {
-                dsuId=keyidentifier;
+            
                  console.log("keyId:",keyidentifier); //How is this generated, getIdentifier of what ? 
                  //console.log("dsu:",dsu.getDID()); keyidentifiere replace DID ?
+                  console.log("keyId:",keyidentifier);
                  
 
 
@@ -170,7 +173,7 @@ function readFilesTest(dsuId, callback) {
             dsu.readFile('/otherData.txt', (err, data) => {
                 console.log("DOther data file! :",data.toString());  
 
-                runTestSRead(sReadSSI);
+                //runTestSRead(sReadSSI);
 
             })
 
