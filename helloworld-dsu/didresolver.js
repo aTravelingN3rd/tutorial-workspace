@@ -43,15 +43,15 @@ function createKeyDid(domain, callback){
     seedSSI.initialize("default", undefined, undefined, "v0", "hint",   (err) => {});
     var readSSI=seedSSI.derive();
     resolver.createDSU(seedSSI, (err, dsuInstance) =>{
-        console.log(seedSSI.getPublicKey());
+        var did="did:"+seedSSI.getDLDomain()+":"+seedSSI.getIdentifier();
         var didDocument= {
           "@context": "https://www.w3.org/ns/did/v1",
-          "id": "did:example:123456789abcdefghi",
+          "id": did,
           "authentication": [{
 
-            "id": "did:example:123456789abcdefghi#keys-1",
+            "id": did+"#keys-1",
             "type": "Ed25519VerificationKey2018",
-            "controller": "did:example:123456789abcdefghi",
+            "controller": did,
             "publicKeyBase58": seedSSI.getPublicKey().split('\n')[1]+''+seedSSI.getPublicKey().split('\n')[2]
           }]
         };
@@ -73,7 +73,7 @@ function resolveKeyDid(keydid, callback){
             const dataObject = JSON.parse(data.toString());
             console.log("Resolve did with sread:",dataObject);
 
-            callback(err,seedSSI);
+                
            
         });
     });
