@@ -14,6 +14,8 @@ const keyssispace = opendsu.loadApi("keyssi");
 const crypto = opendsu.loadApi("crypto");
 
 
+
+
 console.log("hello");
 
 
@@ -21,10 +23,10 @@ console.log("hello");
 
 createKeyDid('default', (err, did, seedSSI)=> {
 
-    resolveKeyDid(did, seedSSI, (err,seedSSI)=> {   
+    resolveKeyDid(did, (err, keydid, pk )=> {   
 
-        signWithKeyDid(seedSSI,"hello", (err, status)=>{
-            console.log("status",status)
+        signWithKeyDid(seedSSI,keydid,"hello",pk, (err, status)=>{
+            console.log("status of signature verification",status)
             
         })
             
@@ -52,7 +54,7 @@ function createKeyDid(domain, callback){
             "id": did+"#keys-1",
             "type": "Ed25519VerificationKey2018",
             "controller": did,
-            "publicKeyBase58": seedSSI.getPublicKey().split('\n')[1]+''+seedSSI.getPublicKey().split('\n')[2]
+            "publicKeyBase58": seedSSI.getPublicKey()//.split('\n')[1]+''+seedSSI.getPublicKey().split('\n')[2]
           }]
         };
         dsuInstance.writeFile('/did', JSON.stringify(didDocument), (err) => {
@@ -73,6 +75,10 @@ function resolveKeyDid(keydid, callback){
             const dataObject = JSON.parse(data.toString());
             console.log("Resolve did with sread:",dataObject);
 
+            var pk=dataObject.authentication[0].publicKeyBase58;
+
+            callback(err,keydid, pk);
+
                 
            
         });
@@ -81,10 +87,10 @@ function resolveKeyDid(keydid, callback){
 
 
 
-function signWithKeyDid(keydid, message, callback){
-    crypto.hash(keydid, message, (err, hash) => {
-            crypto.sign(keydid, hash, (err, signature) => {
-                crypto.verifySignature(keydid, hash, signature, (err, status)=>{
+function signWithKeyDid(seedSSI, keydid, message, pk, callback){
+    crypto.hash(seedSSI, message, (err, hash) => {
+            crypto.sign(seedSSI, hash, (err, signature) => {
+                crypto.verifySignature(keydid, hash, signature, pk, (err, status)=>{
                     callback(err,status);
                 })
             });
